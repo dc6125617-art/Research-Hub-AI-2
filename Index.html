@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResearchHub AI: 2026 MVP Strategy & Market Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lato:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #F8F7F4;
+            color: #3A3A3A;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #3A3A3A;
+        }
+
+        .font-display {
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+        }
+
+        .font-mono {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section - Eye-friendly soft blue-gray */
+        .hero {
+            background: linear-gradient(135deg, #7B9BA8 0%, #9BA89B 100%);
+            color: #F8F7F4;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="1200" height="600" fill="url(%23dots)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #F8F7F4;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: rgba(248, 247, 244, 0.95);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background-color: #E8E6E1;
+            color: #7B9BA8;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: #F8F7F4;
+            border: 2px solid #F8F7F4;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        section.alt {
+            background-color: #EDE9E2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #7B9BA8;
+        }
+
+        /* Cards */
+        .card {
+            background: #FFFFFF;
+            border-radius: 0.65rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 4px solid #9BA89B;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #7B9BA8;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #9BA89B;
+            margin-bottom: 1rem;
+        }
+
+        .card-content {
+            color: #3A3A3A;
+            line-height: 1.8;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 0.65rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-top: 3px solid #7B9BA8;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #7B9BA8;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #9BA89B;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 350px;
+            margin-bottom: 2rem;
+            background: #FFFFFF;
+            padding: 2rem;
+            border-radius: 0.65rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Competitor Table */
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #FFFFFF;
+            border-radius: 0.65rem;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .competitor-table th {
+            background-color: #7B9BA8;
+            color: #F8F7F4;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .competitor-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #EDE9E2;
+        }
+
+        .competitor-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .competitor-table tr:hover {
+            background-color: #F8F7F4;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #3A3A3A;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #7B9BA8;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, #7B9BA815 0%, #9BA89B15 100%);
+            border-left: 4px solid #7B9BA8;
+            padding: 2rem;
+            border-radius: 0.65rem;
+            margin: 2rem 0;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #EDE9E2;
+            padding: 2rem;
+            text-align: center;
+            color: #9BA89B;
+            font-size: 0.9rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* Accent Colors */
+        .accent-primary {
+            color: #7B9BA8;
+        }
+
+        .accent-secondary {
+            color: #9BA89B;
+        }
+
+        .accent-gold {
+            color: #B8A89B;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ResearchHub AI</h1>
+            <p>All-in-One Research Platform: Research Assistant, Companion & Study Tools</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Download Report</button>
+                <button class="btn btn-secondary">View Full Analysis</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="container">
+        <h2>Why ResearchHub AI?</h2>
+        <div class="grid-2">
+            <div>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #3A3A3A; margin-bottom: 1.5rem;">
+                    ResearchHub AI is a comprehensive research platform that combines three essential functions: a powerful research assistant for discovering and analyzing papers, a personal companion for learning support and guidance, and dedicated tools for conducting research studies. Researchers spend countless hours juggling multiple tools—now they can do it all in one place.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #3A3A3A;">
+                    With 67% of universities now requiring digital research tools and 54% of researchers using mobile research apps, the market is ready for an integrated solution that combines citation management, research assistance, learning companionship, and study tools in one intelligent platform.
+                </p>
+            </div>
+            <div>
+                <div class="stat-card">
+                    <div class="stat-value">7.5%</div>
+                    <div class="stat-label">Market CAGR (2026-2035)</div>
+                </div>
+                <div class="stat-card" style="margin-top: 1rem;">
+                    <div class="stat-value">$0.88B</div>
+                    <div class="stat-label">Market Size by 2035</div>
+                </div>
+                <div class="stat-card" style="margin-top: 1rem;">
+                    <div class="stat-value">68%</div>
+                    <div class="stat-label">Academic Users Share</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Overview -->
+    <section class="alt">
+        <div class="container">
+            <h2>Market Opportunity</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">$0.49B</div>
+                    <div class="stat-label">2026 Global Market</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">$0.88B</div>
+                    <div class="stat-label">2035 Projected Market</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">67%</div>
+                    <div class="stat-label">Universities Adopted Digital Tools</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="marketChart"></canvas>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3 class="card-title">Market Drivers</h3>
+                    <ul class="feature-list">
+                        <li>67% of universities adopted digital research platforms</li>
+                        <li>54% of researchers use mobile research apps (26% increase since 2020)</li>
+                        <li>Rising need for integrated research workflows</li>
+                        <li>Explosion of research papers (30M+ new papers annually)</li>
+                        <li>Integration of AI and ML in academic workflows</li>
+                        <li>Remote learning and distributed research teams</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Market Challenges</h3>
+                    <ul class="feature-list">
+                        <li>Tool fragmentation across research phases</li>
+                        <li>Incomplete metadata in academic databases</li>
+                        <li>Privacy concerns with research data</li>
+                        <li>Integration with existing workflows</li>
+                        <li>Accuracy of AI recommendations</li>
+                        <li>Institutional adoption barriers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Landscape -->
+    <section class="container">
+        <h2>Competitive Landscape</h2>
+        
+        <table class="competitor-table">
+            <thead>
+                <tr>
+                    <th>Competitor</th>
+                    <th>Type</th>
+                    <th>Key Strength</th>
+                    <th>Key Limitation</th>
+                    <th>Market Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Zotero</strong></td>
+                    <td>Reference Manager</td>
+                    <td>Free, open-source, AI plugins available</td>
+                    <td>Steep learning curve, limited AI features</td>
+                    <td>Established</td>
+                </tr>
+                <tr>
+                    <td><strong>Elicit</strong></td>
+                    <td>AI Research Tool</td>
+                    <td>Systematic literature review, paper summarization</td>
+                    <td>No citation export, limited study tools</td>
+                    <td>Growing</td>
+                </tr>
+                <tr>
+                    <td><strong>Semantic Scholar</strong></td>
+                    <td>Paper Discovery</td>
+                    <td>AI-powered discovery, metadata extraction</td>
+                    <td>No citation formatting, no companion features</td>
+                    <td>Established</td>
+                </tr>
+                <tr>
+                    <td><strong>Paperpile</strong></td>
+                    <td>Reference Manager</td>
+                    <td>Google Workspace integration, clean UI</td>
+                    <td>Limited AI features, no study tools</td>
+                    <td>Growing</td>
+                </tr>
+                <tr>
+                    <td><strong>Scite</strong></td>
+                    <td>Citation Analysis</td>
+                    <td>Citation context analysis, credibility scoring</td>
+                    <td>No PDF extraction, expensive pricing</td>
+                    <td>Niche</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box">
+            <h3>ResearchHub AI Differentiation</h3>
+            <p>Unlike fragmented tools that require researchers to use multiple platforms, ResearchHub AI combines <strong>research discovery, intelligent citation management, learning companionship, and study tools</strong> in one integrated platform. It's designed for researchers who want a unified experience—without the friction of managing multiple subscriptions and learning curves.</p>
+        </div>
+    </section>
+
+    <!-- MVP Framework -->
+    <section class="alt">
+        <div class="container">
+            <h2>MVP Framework</h2>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1.5rem;">Core Features (Phase 1)</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">1. Research Assistant</h4>
+                    <p>AI-powered paper discovery, summarization, and citation extraction. Upload PDFs or search academic databases to find relevant research instantly.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">2. AI Learning Companion</h4>
+                    <p>Personal AI tutor that explains complex research concepts, answers questions, and provides learning guidance tailored to your research topic.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">3. Research Study Tools</h4>
+                    <p>Structured tools for conducting research studies: hypothesis testing, data collection templates, statistical analysis guides, and study design frameworks.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">4. Citation Management</h4>
+                    <p>Generate citations in APA, MLA, Chicago, Harvard, IEEE, BibTeX formats. One-click export to Word, Google Docs, Zotero, Mendeley.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">5. Research Paper Library</h4>
+                    <p>Cloud-based storage for PDFs with full-text search, tagging, annotation, and collaborative sharing capabilities.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">6. Study Progress Tracking</h4>
+                    <p>Track research progress, set milestones, monitor reading completion, and visualize your research journey with interactive dashboards.</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Feature Priority Matrix</h3>
+            <div class="chart-container">
+                <canvas id="priorityChart"></canvas>
+            </div>
+
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem;">Business Model</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">Freemium Tier</h4>
+                    <p><strong>Price:</strong> Free</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.95rem;">5 papers/month, basic research tools, limited AI companion.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">Student Plan</h4>
+                    <p><strong>Price:</strong> ₱149/month</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.95rem;">100 papers/month, full research tools, unlimited AI companion, study tracking.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color: #7B9BA8; margin-bottom: 0.75rem;">Professional Plan</h4>
+                    <p><strong>Price:</strong> ₱499/month</p>
+                    <p style="margin-top: 0.5rem; font-size: 0.95rem;">Unlimited papers, API access, team collaboration, advanced analytics.</p>
+                </div>
+            </div>
+
+            <div class="chart-container" style="margin-top: 2rem;">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="container">
+        <h2>Recommended Tech Stack</h2>
+        
+        <div class="grid-2">
+            <div class="card">
+                <h3 class="card-title">Frontend & Mobile</h3>
+                <ul class="feature-list">
+                    <li><strong>React:</strong> Web application</li>
+                    <li><strong>React Native:</strong> iOS/Android apps</li>
+                    <li><strong>Redux:</strong> State management</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Backend & Data</h3>
+                <ul class="feature-list">
+                    <li><strong>Node.js:</strong> API server</li>
+                    <li><strong>PostgreSQL:</strong> Structured data</li>
+                    <li><strong>Elasticsearch:</strong> Full-text search</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="card-title">AI/ML & NLP</h3>
+                <ul class="feature-list">
+                    <li><strong>OpenAI GPT-4:</strong> AI assistant & learning companion</li>
+                    <li><strong>spaCy:</strong> NLP and entity recognition</li>
+                    <li><strong>PyPDF2:</strong> PDF parsing</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 class="card-title">Integrations & APIs</h3>
+                <ul class="feature-list">
+                    <li><strong>CrossRef API:</strong> Citation verification</li>
+                    <li><strong>PubMed API:</strong> Biomedical research</li>
+                    <li><strong>Semantic Scholar API:</strong> Paper metadata</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2026 Trends -->
+    <section class="alt">
+        <div class="container">
+            <h2>2026 Trends to Leverage</h2>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <h3 class="card-title">AI-Assisted Research</h3>
+                    <p>Integration with writing tools and research platforms for seamless workflow. AI handles repetitive tasks so researchers focus on insights.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Personalized Learning</h3>
+                    <p>AI companion adapts to individual learning styles and research needs. Customized explanations and guidance for each researcher.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Cross-Disciplinary Support</h3>
+                    <p>Tools supporting diverse research methodologies across STEM, humanities, social sciences, and professional fields.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Collaborative Research</h3>
+                    <p>Real-time collaboration on research projects, shared libraries, and team-based study tools for distributed teams.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Research Integrity</h3>
+                    <p>Built-in plagiarism detection, citation verification, and compliance tools for ethical research practices.</p>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Mobile-First Research</h3>
+                    <p>Seamless mobile experience for on-the-go research, reading, and study. Full functionality on phones and tablets.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go-to-Market Strategy -->
+    <section class="container">
+        <h2>Go-to-Market Strategy</h2>
+
+        <div style="margin-bottom: 2rem;">
+            <div class="card">
+                <h3 class="card-title">Phase 1: MVP Launch (Months 1-3)</h3>
+                <p><strong>Focus:</strong> Research assistant and learning companion core features</p>
+                <p style="margin-top: 0.5rem;"><strong>Target:</strong> Graduate students and early-career researchers</p>
+                <p style="margin-top: 0.5rem;"><strong>Channels:</strong> Reddit (r/academia), academic Twitter, university partnerships</p>
+                <p style="margin-top: 0.5rem;"><strong>Success Metrics:</strong> 2,000+ downloads, 25%+ weekly active user retention</p>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <h3 class="card-title">Phase 2: Feature Expansion (Months 4-9)</h3>
+                <p><strong>Focus:</strong> Study tools, research tracking, institutional integrations</p>
+                <p style="margin-top: 0.5rem;"><strong>Target:</strong> Institutional partnerships with universities and research centers</p>
+                <p style="margin-top: 0.5rem;"><strong>Channels:</strong> University licensing, academic conferences, institutional partnerships</p>
+                <p style="margin-top: 0.5rem;"><strong>Success Metrics:</strong> 20,000+ users, 10%+ conversion to paid</p>
+            </div>
+
+            <div class="card" style="margin-top: 1.5rem;">
+                <h3 class="card-title">Phase 3: Scale & Enterprise (Months 10-18)</h3>
+                <p><strong>Focus:</strong> B2B institutional licensing, API for LMS integration</p>
+                <p style="margin-top: 0.5rem;"><strong>Target:</strong> Universities, research institutions, publishers</p>
+                <p style="margin-top: 0.5rem;"><strong>Channels:</strong> Enterprise sales, conference sponsorships, API partnerships</p>
+                <p style="margin-top: 0.5rem;"><strong>Success Metrics:</strong> 100,000+ users, ₱10M+ ARR</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Metrics -->
+    <section class="alt">
+        <div class="container">
+            <h2>Success Metrics (Year 1)</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">User Downloads</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">8-12%</div>
+                    <div class="stat-label">Paid Conversion Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">35%+</div>
+                    <div class="stat-label">30-Day Retention</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">₱2-5M</div>
+                    <div class="stat-label">Annual Recurring Revenue</div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="card">
+                    <h3 class="card-title">Engagement Metrics</h3>
+                    <ul class="feature-list">
+                        <li>35%+ 30-day retention (industry benchmark: 25%)</li>
+                        <li>15%+ 90-day retention</li>
+                        <li>4+ sessions/week average usage</li>
+                        <li>50+ papers processed per active user/month</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3 class="card-title">Quality Metrics</h3>
+                    <ul class="feature-list">
+                        <li>NPS 45+ (industry benchmark: 35)</li>
+                        <li>App Store rating 4.5+ stars</li>
+                        <li>95%+ research tool accuracy</li>
+                        <li>99.9% API uptime</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container">
+        <div class="highlight-box">
+            <h2 style="margin-bottom: 1rem;">Ready to Transform Academic Research?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">ResearchHub AI provides a unified platform for research discovery, learning support, and study tools. With market tailwinds, proven competitor validation, and a sustainable business model, the time to launch is now.</p>
+            <div class="btn-group">
+                <button class="btn btn-primary">Get Started</button>
+                <button class="btn btn-secondary">Schedule Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>ResearchHub AI MVP Strategy Report</strong> | 2026 Market Analysis</p>
+        <p style="margin-top: 0.5rem;">Data sourced from Business Research Insights, Atlas Workspace, and academic research databases</p>
+    </footer>
+
+    <script>
+        // Market Growth Chart
+        const marketCtx = document.getElementById('marketChart');
+        if (marketCtx) {
+            new Chart(marketCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033', '2034', '2035'],
+                    datasets: [{
+                        label: 'Market Size (Billions USD)',
+                        data: [0.49, 0.53, 0.57, 0.62, 0.67, 0.72, 0.78, 0.84, 0.88, 0.88],
+                        borderColor: '#7B9BA8',
+                        backgroundColor: 'rgba(123, 155, 168, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 5,
+                        pointBackgroundColor: '#9BA89B',
+                        pointBorderColor: '#7B9BA8',
+                        pointBorderWidth: 2,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                font: { family: "'Lato', sans-serif", size: 12 },
+                                color: '#3A3A3A'
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0,0,0,0.03)' },
+                            ticks: { color: '#9BA89B' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#9BA89B' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Feature Priority Chart
+        const priorityCtx = document.getElementById('priorityChart');
+        if (priorityCtx) {
+            new Chart(priorityCtx, {
+                type: 'barh',
+                data: {
+                    labels: ['Research Assistant', 'Learning Companion', 'Study Tools', 'Citation Management', 'Paper Library', 'Progress Tracking'],
+                    datasets: [{
+                        label: 'Implementation Priority (%)',
+                        data: [100, 95, 90, 85, 80, 75],
+                        backgroundColor: ['#7B9BA8', '#9BA89B', '#B8A89B', '#A89BA8', '#8BA89B', '#9BA8A8'],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        x: {
+                            max: 100,
+                            grid: { color: 'rgba(0,0,0,0.03)' },
+                            ticks: { color: '#9BA89B' }
+                        },
+                        y: {
+                            grid: { display: false },
+                            ticks: { color: '#3A3A3A' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Revenue Model Pie Chart
+        const revenueCtx = document.getElementById('revenueChart');
+        if (revenueCtx) {
+            new Chart(revenueCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Student Plans (45%)', 'Professional Plans (35%)', 'Institutional (20%)'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: ['#7B9BA8', '#9BA89B', '#B8A89B'],
+                        borderColor: '#F8F7F4',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'Lato', sans-serif", size: 12 },
+                                color: '#3A3A3A',
+                                padding: 15
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
